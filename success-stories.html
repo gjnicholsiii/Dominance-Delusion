@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dominance & Delusion | Success Stories</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { margin:0; background:#0b0b0b; color:#fff; font-family: Arial, sans-serif; }
+    header { padding:70px 20px; text-align:center; background:#111; }
+    h1 { margin:0 0 10px; font-size:46px; letter-spacing:2px; }
+    header p { margin:0; opacity:.75; }
+
+    .wrap { max-width:1100px; margin:0 auto; padding:40px 20px; }
+    .grid { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+    .card {
+      background:#161616;
+      border:1px solid #222;
+      border-left:4px solid crimson;
+      padding:16px;
+      cursor:pointer;
+      transition: transform .08s ease;
+    }
+    .card:hover { transform: translateY(-2px); }
+
+    .photo {
+      width:100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius:6px;
+      background:#0f0f0f;
+      border:1px solid #222;
+    }
+
+    .tag { margin:10px 0 6px; font-size:12px; letter-spacing:1px; opacity:.7; text-transform:uppercase; }
+    .title { font-size:18px; font-weight:bold; margin:0 0 8px; }
+    .blurb { margin:0; opacity:.82; line-height:1.35; }
+
+    .topbar {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 20px; background:#0f0f0f; border-bottom:1px solid #222;
+      position: sticky; top:0;
+    }
+    .topbar a { color:crimson; text-decoration:none; font-weight:bold; }
+
+    /* Modal */
+    .modalOverlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.75);
+      display:none; align-items:center; justify-content:center; padding:18px;
+    }
+    .modal {
+      width:min(900px, 100%);
+      background:#121212;
+      border:1px solid #222;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    .modalHeader {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 16px; background:#0f0f0f; border-bottom:1px solid #222;
+    }
+    .closeBtn {
+      background:transparent; border:1px solid #333; color:#fff;
+      padding:8px 10px; border-radius:6px; cursor:pointer;
+    }
+    .modalBody { display:grid; gap:16px; grid-template-columns: 1fr 1.2fr; padding:16px; }
+    .modalBody img { width:100%; border-radius:8px; border:1px solid #222; }
+    .modalBody h2 { margin:0 0 8px; }
+    .meta { opacity:.75; font-size:14px; margin:0 0 12px; }
+    .long { opacity:.88; line-height:1.45; }
+    @media (max-width: 780px) { .modalBody { grid-template-columns: 1fr; } }
+
+    .sectionTitle { margin:46px 0 14px; font-size:18px; letter-spacing:1px; opacity:.9; }
+    footer { text-align:center; padding:32px 20px; opacity:.65; border-top:1px solid #222; background:#0f0f0f; }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div style="opacity:.85; letter-spacing:1px;">DOMINANCE & DELUSION</div>
+    <div><a href="index.html">Return</a></div>
+  </div>
+
+  <header>
+    <h1>VIEW SUCCESS STORIES</h1>
+    <p>Profiles of modern dominance, curated for your spiritual wellbeing.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+
+    <div class="sectionTitle">Comments</div>
+    <p style="opacity:.75; max-width:850px; line-height:1.45; margin-top:0;">
+      Keep it funny. No doxxing. No threats. No “go harass this person” energy. We’re mocking a genre, not building a mob.
+    </p>
+
+    <!-- Giscus embed goes here (Step 3 below). -->
+    <div id="comments">
+      <!-- Replace the script block below with your own giscus config once you set it up -->
+      <div style="opacity:.7; padding:14px; border:1px dashed #333; border-radius:8px;">
+        Comments will appear here after you finish the Giscus setup.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Built on discipline, delusion, and free hosting.
+  </footer>
+
+  <!-- Modal -->
+  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modalHeader">
+        <div style="font-weight:bold; letter-spacing:1px;">PROFILE</div>
+        <button class="closeBtn" id="closeBtn">Close</button>
+      </div>
+      <div class="modalBody">
+        <img id="modalImg" alt="Profile photo" />
+        <div>
+          <h2 id="modalName"></h2>
+          <p class="meta" id="modalMeta"></p>
+          <p class="long" id="modalText"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Replace these with your real roast targets.
+    // IMPORTANT: If you are using real people, stick to public figures or people who clearly opted-in.
+    // Safer and funnier: parody archetypes ("Crypto Kyle", "Podcast Chad") + stock photos.
+    const profiles = [
+      {
+        name: "Crypto Kyle",
+        meta: "27 • Visionary • Alpha Tier II",
+        img: "images/kyle.jpg",
+        blurb: "Believes eye contact is leadership and silence is emotional intelligence.",
+        long: "Kyle discovered masculinity in a 14-second reel and has never recovered. He communicates exclusively in buzzwords, confusion, and vague threats of becoming “unrecognizable.”"
+      },
+      {
+        name: "Cold Plunge Chad",
+        meta: "31 • Discipline Evangelist",
+        img: "images/chad.jpg",
+        blurb: "Treats ice water like therapy and therapy like weakness.",
+        long: "Chad’s personality is a checklist. He wakes up at 4:00 a.m. to defeat the concept of intimacy. He has never been calm, only quiet."
+      },
+      {
+        name: "Podcast Brandon",
+        meta: "34 • Thought Leader • Relationship Minimalist",
+        img: "images/brandon.jpg",
+        blurb: "Has strong opinions and zero inner life.",
+        long: "Brandon sells certainty to strangers while privately negotiating with his own reflection. His catchphrase is “men used to…” and his closest friend is his microphone."
+      }
+    ];
+
+    const grid = document.getElementById("grid");
+    const overlay = document.getElementById("modalOverlay");
+    const closeBtn = document.getElementById("closeBtn");
+
+    const modalImg = document.getElementById("modalImg");
+    const modalName = document.getElementById("modalName");
+    const modalMeta = document.getElementById("modalMeta");
+    const modalText = document.getElementById("modalText");
+
+    function openModal(p) {
+      modalImg.src = p.img;
+      modalName.textContent = p.name;
+      modalMeta.textContent = p.meta;
+      modalText.textContent = p.long;
+      overlay.style.display = "flex";
+    }
+
+    function closeModal() {
+      overlay.style.display = "none";
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    profiles.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img class="photo" src="${p.img}" alt="${p.name}">
+        <div class="tag">Verified Alpha</div>
+        <div class="title">${p.name}</div>
+        <p class="blurb">${p.blurb}</p>
+      `;
+      card.addEventListener("click", () => openModal(p));
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
